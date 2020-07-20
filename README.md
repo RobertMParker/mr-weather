@@ -1,5 +1,5 @@
 # mr-weather
-Mussel Rock Weather Dashboard
+[Mussel Rock Weather Dashboard](https://mr.robertmparker.com)
 
 The dashboard website is beta.  It's going to have bugs (all software has bugs) and bad data (stale data, bad sensors, station in rotor, etc.).  Always use your personal judgement before flying.
 
