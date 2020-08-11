@@ -11,8 +11,8 @@ class TideChart {
     var yesterday = moment().subtract(1, 'days');
     var tomorrow = moment().add(1, 'days');
     
-    // This NOAA api is great
-    var tideDataUrl = "https://tidesandcurrents.noaa.gov/api/datagetter?product=predictions&application=NOS.COOPS.TAC.WL&begin_date="
+    // TODO(robparker): Check if NOAA api fixed their bug with CORS, and remove the proxy call through https://cors-anywhere.herokuapp.com/
+    var tideDataUrl = "https://cors-anywhere.herokuapp.com/https://tidesandcurrents.noaa.gov/api/datagetter?product=predictions&application=NOS.COOPS.TAC.WL&begin_date="
         + yesterday.format(DATE_FORMAT)
         + "&end_date="
         + tomorrow.format(DATE_FORMAT)
