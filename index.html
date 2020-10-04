@@ -21,8 +21,8 @@
   </head>
   <body>
     <h1>Mussel Rock Weather Conditions</h1>
-    
-    <p><b>DISCLAIMER:</b> This website is beta.  It is going to have bugs and bad data.  Always use your personal judgement before flying.  Check out 
+
+    <p><b>DISCLAIMER:</b> This website is beta.  It is going to have bugs and bad data.  Always use your personal judgement before flying.  Check out
       the <a href="readme.html">README</a> for this website to get the most insight.</p>
 
     <h2><a target="_blank" href='https://www.wunderground.com/dashboard/pws/KCADALYC1'>Mussel Rock - Longview Drive - KCADALYC1</a></h2>
@@ -35,7 +35,7 @@
     <canvas id="KCADALYC37-speed" height="120"></canvas>
     <!-- TODO(robparker): Uncomment this if the wind direction reporting starts working properly again.  The data always says its South.
     <canvas id="KCADALYC37-direction" height="100"></canvas> -->
-    
+
     <h2><a target="_blank" href='https://www.wunderground.com/dashboard/pws/KCAPACIF205'>Pacifica - Sharp Park Beach - KCAPACIF205</a></h2>
     <p>This is a new station.  Not sure how to trust data yet.</p>
     <canvas id="KCAPACIF205-speed" height="120"></canvas>
@@ -47,30 +47,31 @@
     <canvas id="KCASANFR69-direction" height="100"></canvas>
 
     <h1>Webcams</h1>
-    
+
     <h3>Mussel Rock</h3>
     <img height=480 width=640 src="https://icons.wunderground.com/webcamramdisk/b/a/barenjager/5/current.jpg">
     <img height=480 width=640 src="https://icons.wunderground.com/webcamramdisk/b/a/barenjager/8/current.jpg">
-    
+    <iframe width="1120" height="630" src="https://www.youtube.com/embed/L6e1EEA-dQI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
     <h3>Fort Funston</h3>
     <!-- TODO(robparker): Get rid of this https proxy when when flyfunston.org fixes their SSL Certificate.  -->
     <a target="_blank" href="http://www.flyfunston.org/newwebcam/">
       <img height=480 width=640 src="https://mussel-rock-weather.wl.r.appspot.com/www.flyfunston.org/newwebcam/wslarge.jpg">
       <img height=480 width=640 src="https://mussel-rock-weather.wl.r.appspot.com/www.flyfunston.org/newwebcam/ropes1wslarge.jpg">
     </a>
-    
+
     <h3>Pacifica</h3>
     <iframe width="1120" height="630" src="https://www.youtube.com/embed/zYi_5AF6B2A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
     <br/>
     <p>The pier points directly West, so the flag should indicate which direction the wind is pointed.  Also check for whitecaps.</p>
     <a target="_blank" href="https://www.pacificaview.net/livecam/">More Pacifica webcams...</a>
     <br/>
-    
+
     <a href='https://fog.today'>
     <h3>Fog.today</h3>
     <img width=640 src='https://fog.today/current.jpg'/></a>
     <br/>
-    
+
     <div style="width:100%">
       <canvas id="tide-chart"></canvas>
     </div>
