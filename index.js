@@ -1,8 +1,8 @@
 window.onload = function() {
-  new WindCharts('KCADALYC37');
-  new WindCharts('KCADALYC1');
-  new WindCharts('KCAPACIF205');
-  new WindCharts('KCASANFR69');
+  new WUWind('KCADALYC37');
+  new WUWind('KCADALYC1');
+  new WUWind('KCAPACIF205');
+  new WUWind('KCASANFR69');
   new TideChart('9414290');
 };
 
