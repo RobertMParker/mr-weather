@@ -4,7 +4,34 @@
 const API_KEY = '6532d6454b8aa370768e63d6ba5a832e'
 const FONT_SIZE = 20;
 const RED = 'rgb(235, 64, 52)';
+const TRANSLUCENT_RED = 'rgba(235, 64, 52, 0.7)';
 const MUSTARD = 'rgb(222, 163, 35)';
+
+// Vertical line on hover -- from https://stackoverflow.com/a/45172506
+Chart.defaults.LineWithLine = Chart.defaults.line;
+Chart.controllers.LineWithLine = Chart.controllers.line.extend({
+  draw: function(ease) {
+    Chart.controllers.line.prototype.draw.call(this, ease);
+
+    if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
+      var activePoint = this.chart.tooltip._active[0],
+        ctx = this.chart.ctx,
+        x = activePoint.tooltipPosition().x,
+        topY = this.chart.legend.bottom,
+        bottomY = this.chart.chartArea.bottom;
+
+      // draw line
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(x, topY);
+      ctx.lineTo(x, bottomY);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#07C';
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+});
 
 // A class for speed(avg + gust) and direction wind charts
 class WindCharts {
@@ -46,42 +73,48 @@ class WindCharts {
             windGust.push({x: observationMoment, y: observation.imperial.windgustHigh});
           }
         }
-        this.createSpeedScatterChart(windSpeed, windGust);
+        this.createSpeedLineChart(windSpeed, windGust);
         this.createDirectionScatterChart(windDir);
       } else {
         // This can be any status code other than 200.  The most common case is HTTP 204, which happens
         // when no data is available, the status code is not documented in the API.
         console.error("Didn't get the expected status: " + this.xmlhttp.status);
         // Display empty charts
-        this.createSpeedScatterChart([], []);
+        this.createSpeedLineChart([], []);
         this.createDirectionScatterChart([]);   
       }
     }
   }
   
-  createSpeedScatterChart(windSpeed, windGust) {
+  createSpeedLineChart(windSpeed, windGust) {
     var maxSpeed = this.getMaxSpeed(windSpeed, windGust);
     var speedCtx = document.getElementById(this.stationId + '-speed');
-    Chart.Scatter(speedCtx, {
+    this.speedLine = new Chart(speedCtx, {
+      type: 'LineWithLine',
       data: {
         datasets: [{
           label: 'Wind Speed',
-          borderColor: RED,
-          backgroundColor: RED,
-          pointRadius: 5,
-          pointHoverRadius: 10,
+          borderColor: TRANSLUCENT_RED,
+          borderWidth: 0,
+          backgroundColor: TRANSLUCENT_RED,
+          pointRadius: 0,
           data: windSpeed,
         },
         {
           label: 'Wind Gust',
           borderColor: MUSTARD,
           backgroundColor: MUSTARD,
-          pointRadius: 5,
-          pointHoverRadius: 10,
+          pointRadius: 0,
           data: windGust,
+          fill: false,
         }]
       },
       options: {
+        animation: false,
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+        },
         title: {
           display: false,
         },
@@ -97,7 +130,6 @@ class WindCharts {
               unit: 'minute'
             },
             ticks: {
-              maxTicksLimit: 20,
               fontSize: FONT_SIZE,
               // Set max to current date, it helps ensure stale data stands out better
               max: moment(),
@@ -112,18 +144,26 @@ class WindCharts {
   
   createDirectionScatterChart(windDir) {
     var directionCtx = document.getElementById(this.stationId + '-direction');
-    this.directionScatter = Chart.Scatter(directionCtx, {
+    this.directionScatter = new Chart(directionCtx, {
+      type: 'LineWithLine',
       data: { 
         datasets: [{
           label: 'Wind Direction',
           borderColor: RED,
           backgroundColor: RED,
           pointRadius: 5,
-          pointHoverRadius: 10,
+          pointHoverRadius: 5,
           data: windDir,
+          fill: false,
+          showLine: false,
         }]
       },
       options: {
+        animation: false,
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+        },
         title: {
           display: false,
         },
@@ -139,7 +179,6 @@ class WindCharts {
               unit: 'minute'
             },
             ticks: {
-              maxTicksLimit: 20,
               fontSize: FONT_SIZE,
               max: moment(),
             }
