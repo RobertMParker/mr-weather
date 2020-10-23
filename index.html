@@ -13,10 +13,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="wind.js"></script>
     <script src="wu-wind.js"></script>
     <script src="aw-wind.js"></script>
     <script src="belchertown-wind.js"></script>
+    <script src="noaa-wind.js"></script>
     <script src="tide-chart.js"></script>
     <script src="index.js"></script>
     <meta charset="utf-8" />
@@ -53,6 +55,11 @@
     <p>This station is near Green Monster, so it could be useful for assessing flyability there.</p>
     <canvas id="80:7D:3A:7C:36:29-speed" height="120"></canvas>
     <canvas id="80:7D:3A:7C:36:29-direction" height="100"></canvas>
+
+    <h2><a target="_blank" href='https://www.ndbc.noaa.gov/station_page.php?station=46026'>Farallones Buoy</a></h2>
+    <p>This buoy 20 miles off the coast of San Francisco can indicate future conditions.</p>
+    <canvas id="urn:ioos:station:wmo:46026-speed" height="120"></canvas>
+    <canvas id="urn:ioos:station:wmo:46026-direction" height="100"></canvas>
 
     <h1>Webcams</h1>
 

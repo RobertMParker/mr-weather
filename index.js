@@ -4,6 +4,7 @@ window.onload = function() {
   new BelchertownWind('http://www.mixdivr.org/wx/weewx/belchertown/json/homepage.json');
   new WUWind('KCASANFR69');
   new AWWind('80:7D:3A:7C:36:29');
+  new NOAAWind('urn:ioos:station:wmo:46026', 7);
   new TideChart('9414290');
 };
 
