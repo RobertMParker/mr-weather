@@ -10,7 +10,7 @@ class AWWind extends Wind {
     // Make request to get JSON weather data for stationId
     this.xmlhttp = new XMLHttpRequest();
     this.xmlhttp.onreadystatechange = this.onDataLoad.bind(this);
-    this.xmlhttp.open("GET", 'https://lightning.ambientweather.net/device-data?macAddress=' + stationId+ '&res=5&start=' + (now-86400000) + '&end=' + now + '&dataKey=graphDataRefined', true);
+    this.xmlhttp.open('GET', 'https://lightning.ambientweather.net/device-data?macAddress=' + stationId+ '&res=5&start=' + (now-86400000) + '&end=' + now + '&dataKey=graphDataRefined', true);
     this.xmlhttp.send();
   }
 
@@ -39,15 +39,11 @@ class AWWind extends Wind {
           windSpeed.push({x: observationMoment, y: observation.windspeedmph});
           windGust.push({x: observationMoment, y: observation.windgustmph});
         }
-        this.createSpeedLineChart(windSpeed, windGust);
-        this.createDirectionScatterChart(windDir);
+        this.createChart(windSpeed, windGust, windDir);
       } else {
-        // This can be any status code other than 200.  The most common case is HTTP 204, which happens
-        // when no data is available, the status code is not documented in the API.
         console.error("Didn't get the expected status: " + this.xmlhttp.status);
         // Display empty charts
-        this.createSpeedLineChart([], []);
-        this.createDirectionScatterChart([]);
+        this.createChart([], [], []);
       }
     }
   }

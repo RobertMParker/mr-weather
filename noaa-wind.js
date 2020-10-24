@@ -53,13 +53,11 @@ class NOAAWind extends Wind {
           windSpeed.push({x: observationMoment, y: Math.round(observation['wind_speed (m/s)'] * 2.23694)});
           windGust.push({x: observationMoment, y: Math.round(observation['wind_speed_of_gust (m/s)'] * 2.23694)});
         }
-        this.createSpeedLineChart(windSpeed, windGust);
-        this.createDirectionScatterChart(windDir);
+        this.createChart(windSpeed, windGust, windDir);
       } else {
         console.error("Didn't get the expected status: " + this.xmlhttp.status);
         // Display empty charts
-        this.createSpeedLineChart([], []);
-        this.createDirectionScatterChart([]);
+        this.createChart([], [], []);
       }
     }
   }
