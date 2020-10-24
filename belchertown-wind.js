@@ -50,21 +50,21 @@ class BelchertownWind extends Wind {
             winddirAvg = winddirAvg - 360;
           }
 
-          windDir.push({x: observationMoment, y: winddirAvg});
+          windDir.push({x: observationMoment, y: Math.round(winddirAvg)});
         }
 
         for (var i=0; i<response.chart3.series.windSpeed.data.length; i++) {
           var observation = response.chart3.series.windSpeed.data[i];
           var observationMoment = moment(observation[0]);
           if (!observationMoment.isAfter(minMoment)) continue;
-          windSpeed.push({x: observationMoment, y: observation[1]});
+          windSpeed.push({x: observationMoment, y: Math.round(observation[1] * 10) / 10});
         }
 
         for (var i=0; i<response.chart3.series.windGust.data.length; i++) {
           var observation = response.chart3.series.windGust.data[i];
           var observationMoment = moment(observation[0]);
           if (!observationMoment.isAfter(minMoment)) continue;
-          windGust.push({x: observationMoment, y: observation[1]});
+          windGust.push({x: observationMoment, y: Math.round(observation[1] * 10) / 10});
         }
 
         this.createSpeedLineChart(windSpeed, windGust);
