@@ -6,8 +6,7 @@ class BelchertownWind extends Wind {
     // Make request to get JSON weather data for stationId
     this.xmlhttp = new XMLHttpRequest();
     this.xmlhttp.onreadystatechange = this.onDataLoad.bind(this);
-    // David has a CORS header but not https yet, so need to proxy.
-    this.xmlhttp.open('GET', 'https://cors-anywhere.herokuapp.com/' + stationId, true);
+    this.xmlhttp.open('GET', stationId, true);
     this.xmlhttp.send();
 
     // mixdivr.org's homepage.json has:
