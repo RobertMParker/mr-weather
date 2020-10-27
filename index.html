@@ -19,6 +19,7 @@
     <script src="aw-wind.js"></script>
     <script src="belchertown-wind.js"></script>
     <script src="noaa-wind.js"></script>
+    <script src="nws-wind.js"></script>
     <script src="tide-chart.js"></script>
     <script src="index.js"></script>
     <meta charset="utf-8" />
@@ -87,6 +88,16 @@
       <canvas id="tide-chart"></canvas>
     </div>
     <br/>
+
+    <h2>Forecasts</h2>
+
+    <h3><a href="https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w12=fog&w14u=1&w15u=1&AheadHour=0&Submit=Submit&FcstType=graphical&textField1=37.6666&textField2=-122.4949&site=all&unit=0&dd=&bw=">Mussel Rock Bowl</a></h3>
+    <canvas id="MTR/84,122" height="120"></canvas>
+
+    <h3><a href="https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w12=fog&w14u=1&w15u=1&AheadHour=0&Submit=Submit&FcstType=graphical&textField1=37.712&textField2=-122.5034&site=all&unit=0&dd=&bw=">Fort Funston</a></h3>
+    <canvas id="MTR/84,124" height="120"></canvas>
+
+    <h3>Windy</h3>
     <iframe width="650" height="450" src="https://embed.windy.com/embed2.html?lat=37.473&lon=-122.495&detailLat=37.668&detailLon=-122.494&width=650&height=450&zoom=9&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=true&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0"></iframe>
     <br/>
     <br/>

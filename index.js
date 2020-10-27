@@ -5,6 +5,8 @@ window.onload = function() {
   new WUWind('KCASANFR69');
   new AWWind('80:7D:3A:7C:36:29');
   new NOAAWind('urn:ioos:station:wmo:46026', 7);
+  new NWSWind('MTR/84,122');
+  new NWSWind('MTR/84,124');
   new TideChart('9414290');
 };
 
