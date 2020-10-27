@@ -1,10 +1,5 @@
 // I couldn't find a tide chart that I liked, so what the hell lets just build one...
 
-const DATE_FORMAT = "YYYYMMDD";
-
-const BLUE = 'rgb(59, 73, 227)';
-const BLACK = 'rgb(0, 0, 0)';
-
 class TideChart {
   constructor(stationId) {
     // Get the tide predictions for several days
@@ -13,9 +8,9 @@ class TideChart {
     
     // TODO(robparker): Check if NOAA api fixed their bug with CORS, and remove the proxy call through https://cors-anywhere.herokuapp.com/
     var tideDataUrl = "https://cors-anywhere.herokuapp.com/https://tidesandcurrents.noaa.gov/api/datagetter?product=predictions&application=NOS.COOPS.TAC.WL&begin_date="
-        + yesterday.format(DATE_FORMAT)
+        + yesterday.format(TideChart.DATE_FORMAT)
         + "&end_date="
-        + tomorrow.format(DATE_FORMAT)
+        + tomorrow.format(TideChart.DATE_FORMAT)
         + "&datum=MLLW&station="
         + stationId 
         + "&time_zone=lst_ldt&units=english&interval=hilo&format=json";
@@ -24,6 +19,22 @@ class TideChart {
     this.xmlhttp.onreadystatechange = this.onDataLoad.bind(this);
     this.xmlhttp.open("GET", tideDataUrl, true);
     this.xmlhttp.send();
+  }
+
+  static get FONT_SIZE() {
+    return 20;
+  }
+
+  static get DATE_FORMAT() {
+    return 'YYYYMMDD';
+  }
+
+  static get BLUE() {
+    return 'rgb(59, 73, 227)';
+  }
+
+  static get BLACK() {
+    return 'rgb(0, 0, 0)';
   }
   
   onDataLoad() {
@@ -52,8 +63,8 @@ class TideChart {
 			data: {
         datasets: [{
           label: 'Tide Height',
-          borderColor: BLACK,
-          backgroundColor: BLUE,
+          borderColor: TideChart.BLACK,
+          backgroundColor: TideChart.BLUE,
           pointRadius: 5,
           pointHoverRadius: 10,
           data: tidePredictions,
@@ -67,7 +78,7 @@ class TideChart {
               unit: 'hour'
             },
             ticks: {
-              fontSize: FONT_SIZE,
+              fontSize: TideChart.FONT_SIZE,
               // Only display data for current day, even though we have more data than that.  The extra data isn't
               // visible, it helps form the curve at the graph boundaries.  And graphing a full days worth of data
               // helps shows the peaks and troughs in the graph.
@@ -84,7 +95,7 @@ class TideChart {
 				},
         legend: {
           labels: {
-            fontSize: FONT_SIZE
+            fontSize: TideChart.FONT_SIZE
           },
         },
         // This uses the ChartJS annotation plugin to draw a red vertical line at the current time
