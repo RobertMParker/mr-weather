@@ -27,7 +27,7 @@ class WUWind extends Wind {
         var minMoment = moment().subtract(3, 'hours');
         for (var i=0; i<response.observations.length; i++) {
           var observation = response.observations[i];
-          var observationMoment = moment(observation.obsTimeLocal);
+          var observationMoment = moment.utc(observation.obsTimeUtc);
 
           // Filter out data that is not within the last three hours
           if (!observationMoment.isAfter(minMoment)) continue;
