@@ -1,10 +1,10 @@
 // Class for getting measurements from sdf.ndbc.noaa.gov
 
 class NOAAWind extends Wind {
-  constructor(stationId, tzOffset=0, directionOffset=0) {
+  constructor(stationId, timezone, directionOffset=0) {
     super(directionOffset);
     this.stationId = stationId;
-    this.tzOffset = tzOffset;
+    this.tzOffset = -parseInt(moment().tz(timezone).format('ZZ'))/100;
 
     var startTime = moment().subtract(24, 'hours').format('YYYY-MM-DDTHH:mm[Z]');
     var endTime = moment().format('YYYY-MM-DDTHH:mm[Z]');

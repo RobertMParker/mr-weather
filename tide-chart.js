@@ -2,7 +2,9 @@
 
 class TideChart {
   constructor(stationId) {
-    // Get the tide predictions for several days
+    this.stationId = stationId;
+    
+    // Get the tide predictions for several days, so that the edges of the graph are filled in.
     var yesterday = moment().subtract(1, 'days');
     var tomorrow = moment().add(1, 'days');
     
@@ -57,7 +59,7 @@ class TideChart {
   }
   
   createChart(tidePredictions) {
-    var ctx = document.getElementById('tide-chart');
+    var ctx = document.getElementById(this.stationId);
     var config = {
 			type: 'line',
 			data: {

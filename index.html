@@ -34,27 +34,27 @@
 
     <h2><a target="_blank" href='https://www.wunderground.com/dashboard/pws/KCADALYC1'>Mussel Rock - Longview Drive - KCADALYC1</a></h2>
     <p>This station is in rotor when wind is South, so data can be suspect.  If Coyote is reporting significantly more wind, that is a good sign that this station is in rotor.</p>
-    <canvas id="KCADALYC1" height="120"></canvas>
+    <canvas id="KCADALYC1" class="WUWind" height="120"></canvas>
 
     <h2><a target="_blank" href='https://www.wunderground.com/dashboard/pws/KCADALYC37'>Mussel Rock - Coyote Weather Station - KCADALYC37</a></h2>
     <p>The wind direction on this meter doesn't work.  This station is in rotor when the wind is North.</p>
-    <canvas id="KCADALYC37" height="120"></canvas>
+    <canvas id="KCADALYC37" class="WUWind" height="120"></canvas>
 
     <h2><a target="_blank" href='https://weather.pacificaview.net'>Pacifica - Sharp Park Beach - KCAPACIF205</a></h2>
     <p>This is a new station.  Not sure how to trust data yet.</p>
-    <canvas id="https://www.mixdivr.org/wx/weewx/belchertown/json/homepage.json" height="120"></canvas>
+    <canvas id="https://www.mixdivr.org/wx/weewx/belchertown/json/homepage.json" class="BelchertownWind" height="120"></canvas>
 
     <h2><a target="_blank" href='https://www.wunderground.com/dashboard/pws/KCASANFR69'>Fort Funston - KCASANFR69</a></h2>
     <p>This station is higher than the other two, so it can be a good indicator of what the wind is doing up high.</p>
-    <canvas id="KCASANFR69" height="120"></canvas>
+    <canvas id="KCASANFR69" class="WUWind" height="120"></canvas>
 
     <h2><a target="_blank" href='https://ambientweather.net/dashboard/0e02feb4d3f58cb0676d1cf88653b804#wind_graph'>Mussel Rock - 160 Northridge Drive</a></h2>
     <p>This station is near Green Monster, so it could be useful for assessing flyability there.</p>
-    <canvas id="80:7D:3A:7C:36:29" height="120"></canvas>
+    <canvas id="80:7D:3A:7C:36:29" class="AWWind" height="120"></canvas>
 
     <h2><a target="_blank" href='https://www.ndbc.noaa.gov/station_page.php?station=46026'>Farallones Buoy</a></h2>
     <p>This buoy 20 miles off the coast of San Francisco can indicate future conditions.</p>
-    <canvas id="urn:ioos:station:wmo:46026" height="120"></canvas>
+    <canvas id="urn:ioos:station:wmo:46026" class="NOAAWind" timezone="PST8PDT" height="120"></canvas>
 
     <h1>Webcams</h1>
 
@@ -80,23 +80,23 @@
     <a target="_blank" href="https://www.pacificaview.net/livecam/">More Pacifica webcams...</a>
     <br/>
 
-    <a href='https://fog.today'>
+    <a target="_blank" href='https://fog.today'>
     <h3>Fog.today</h3>
     <img width=640 src='https://fog.today/current.jpg'/></a>
     <br/>
 
     <div style="width:100%">
-      <canvas id="tide-chart"></canvas>
+      <canvas id="9414290" class="TideChart"></canvas>
     </div>
     <br/>
 
     <h2>Forecasts</h2>
 
-    <h3><a href="https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w12=fog&w14u=1&w15u=1&AheadHour=0&Submit=Submit&FcstType=graphical&textField1=37.6666&textField2=-122.4949&site=all&unit=0&dd=&bw=">Mussel Rock Bowl</a></h3>
-    <canvas id="MTR/84,122" height="120"></canvas>
+    <h3><a target="_blank" href="https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w12=fog&w14u=1&w15u=1&AheadHour=0&Submit=Submit&FcstType=graphical&textField1=37.6666&textField2=-122.4949&site=all&unit=0&dd=&bw=">Mussel Rock Bowl</a></h3>
+    <canvas id="MTR/84,122" class="NWSWind" height="120"></canvas>
 
-    <h3><a href="https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w12=fog&w14u=1&w15u=1&AheadHour=0&Submit=Submit&FcstType=graphical&textField1=37.712&textField2=-122.5034&site=all&unit=0&dd=&bw=">Fort Funston</a></h3>
-    <canvas id="MTR/84,124" height="120"></canvas>
+    <h3><a target="_blank" href="https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w12=fog&w14u=1&w15u=1&AheadHour=0&Submit=Submit&FcstType=graphical&textField1=37.712&textField2=-122.5034&site=all&unit=0&dd=&bw=">Fort Funston</a></h3>
+    <canvas id="MTR/84,124" class="NWSWind" height="120"></canvas>
 
     <h3>Windy</h3>
     <iframe width="650" height="450" src="https://embed.windy.com/embed2.html?lat=37.473&lon=-122.495&detailLat=37.668&detailLon=-122.494&width=650&height=450&zoom=9&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=true&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0"></iframe>
