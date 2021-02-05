@@ -1,6 +1,13 @@
 window.onload = function() {
-  // On window load, query the DOM for which chart types exist, and load them.
+  loadChartData();
   
+  // Reload chart data once a minute
+  setInterval(loadChartData, 60 * 1000);
+};
+
+
+function loadChartData() {
+  // query the DOM for which chart types exist, and load them.
   var elements = document.getElementsByClassName("WUWind");
   for (var i=0; i<elements.length; i++) {
     new WUWind(elements[i].id);
@@ -30,6 +37,4 @@ window.onload = function() {
   for (var i=0; i<elements.length; i++) {
     new TideChart(elements[i].id);
   }
-};
-
-// TODO: Refresh the page on a set interval.  Maybe every 10 minutes.
+}
