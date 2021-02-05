@@ -1,8 +1,8 @@
 // Class for Ambient Weather stations referenced by MAC address
 
 class AWWind extends Wind {
-  constructor(stationId, directionOffset=0) {
-    super(directionOffset);
+  constructor(stationId) {
+    super();
     this.stationId = stationId;
 
     var now = Date.now();
@@ -29,13 +29,7 @@ class AWWind extends Wind {
           // Filter out data that is not within the last three hours
           if (!observationMoment.isAfter(minMoment)) continue;
 
-          // Compensate for bad data!
-          var winddirAvg = this.directionOffset + observation.winddir;
-          if (winddirAvg > 360) {
-            winddirAvg = winddirAvg - 360;
-          }
-
-          windDir.push({x: observationMoment, y: winddirAvg});
+          windDir.push({x: observationMoment, y: observation.winddir});
           windSpeed.push({x: observationMoment, y: observation.windspeedmph});
           windGust.push({x: observationMoment, y: observation.windgustmph});
         }

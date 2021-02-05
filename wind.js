@@ -28,9 +28,7 @@ Chart.controllers.LineWithLine = Chart.controllers.line.extend({
 
 // A class for speed(avg + gust) and direction wind charts
 class Wind {
-  constructor(directionOffset=0) {
-    this.directionOffset = directionOffset;
-  }
+  constructor() {}
 
   static get FONT_SIZE() {
     return 20;

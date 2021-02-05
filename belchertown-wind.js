@@ -1,6 +1,6 @@
 class BelchertownWind extends Wind {
-  constructor(stationId, directionOffset=0) {
-    super(directionOffset);
+  constructor(stationId) {
+    super();
     this.stationId = stationId;
 
     // Make request to get JSON weather data for stationId
@@ -43,13 +43,7 @@ class BelchertownWind extends Wind {
           var observationMoment = moment(observation[0]);
           if (!observationMoment.isAfter(minMoment)) continue;
 
-          // Compensate for bad data!
-          var winddirAvg = this.directionOffset + observation[1];
-          if (winddirAvg > 360) {
-            winddirAvg = winddirAvg - 360;
-          }
-
-          windDir.push({x: observationMoment, y: Math.round(winddirAvg)});
+          windDir.push({x: observationMoment, y: Math.round(observation[1])});
         }
 
         for (var i=0; i<response.chart3.series.windSpeed.data.length; i++) {

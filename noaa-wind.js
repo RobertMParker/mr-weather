@@ -1,8 +1,8 @@
 // Class for getting measurements from sdf.ndbc.noaa.gov
 
 class NOAAWind extends Wind {
-  constructor(stationId, timezone, directionOffset=0) {
-    super(directionOffset);
+  constructor(stationId, timezone) {
+    super();
     this.stationId = stationId;
     this.tzOffset = -parseInt(moment().tz(timezone).format('ZZ'))/100;
 
@@ -43,13 +43,7 @@ class NOAAWind extends Wind {
           // Filter out data that is not within the last three hours
           if (!observationMoment.isAfter(minMoment)) continue;
 
-          // Compensate for bad data!
-          var winddirAvg = this.directionOffset + observation['wind_from_direction (degree)'];
-          if (winddirAvg > 360) {
-            winddirAvg = winddirAvg - 360;
-          }
-
-          windDir.push({x: observationMoment, y: winddirAvg});
+          windDir.push({x: observationMoment, y: observation['wind_from_direction (degree)']});
           windSpeed.push({x: observationMoment, y: Math.round(observation['wind_speed (m/s)'] * 2.23694)});
           windGust.push({x: observationMoment, y: Math.round(observation['wind_speed_of_gust (m/s)'] * 2.23694)});
         }

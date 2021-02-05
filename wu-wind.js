@@ -1,6 +1,6 @@
 class WUWind extends Wind {
-  constructor(stationId, directionOffset=0) {
-    super(directionOffset);
+  constructor(stationId) {
+    super();
     this.stationId = stationId;
 
     // Make request to get JSON weather data for stationId
@@ -32,13 +32,7 @@ class WUWind extends Wind {
           // Filter out data that is not within the last three hours
           if (!observationMoment.isAfter(minMoment)) continue;
 
-          // Compensate for bad data!
-          var winddirAvg = this.directionOffset + observation.winddirAvg;
-          if (winddirAvg > 360) {
-            winddirAvg = winddirAvg - 360;
-          }
-
-          windDir.push({x: observationMoment, y: winddirAvg});
+          windDir.push({x: observationMoment, y: observation.winddirAvg});
           // Several fields for windspeed, but avg seems appropriate
           windSpeed.push({x: observationMoment, y: observation.imperial.windspeedAvg});
           // There are several fields(high, low, avg) for gust, but high seems appropriate
