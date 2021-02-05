@@ -1,5 +1,3 @@
-// In case you are reading this, I'm not a frontend developer.  So this may look a bit odd.
-
 // Vertical line on hover -- from https://stackoverflow.com/a/45172506
 Chart.defaults.LineWithLine = Chart.defaults.line;
 Chart.controllers.LineWithLine = Chart.controllers.line.extend({
