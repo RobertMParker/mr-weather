@@ -23,17 +23,17 @@ function loadChartData() {
     new BelchertownWind(elements[i].id);
   }
   
-  var elements = document.getElementsByClassName("AWWind");
+  elements = document.getElementsByClassName("AWWind");
   for (var i=0; i<elements.length; i++) {
     new AWWind(elements[i].id, parseInt(elements[i].getAttribute('wind-direction-offset')));
   }
   
-  var elements = document.getElementsByClassName("NOAAWind");
+  elements = document.getElementsByClassName("NOAAWind");
   for (var i=0; i<elements.length; i++) {
     new NOAAWind(elements[i].id, elements[i].getAttribute('timezone'));
   }
   
-  var elements = document.getElementsByClassName("TideChart");
+  elements = document.getElementsByClassName("TideChart");
   for (var i=0; i<elements.length; i++) {
     new TideChart(elements[i].id);
   }
