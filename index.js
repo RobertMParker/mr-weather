@@ -1,8 +1,8 @@
 window.onload = function() {
   loadChartData();
   
-  // Reload chart data once a minute
-  setInterval(loadChartData, 60 * 1000);
+  // Reload chart data every 10 minutes
+  setInterval(loadChartData, 10 * 60 * 1000);
 };
 
 
