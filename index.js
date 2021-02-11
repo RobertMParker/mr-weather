@@ -25,7 +25,7 @@ function loadChartData() {
   
   var elements = document.getElementsByClassName("AWWind");
   for (var i=0; i<elements.length; i++) {
-    new AWWind(elements[i].id);
+    new AWWind(elements[i].id, parseInt(elements[i].getAttribute('wind-direction-offset')));
   }
   
   var elements = document.getElementsByClassName("NOAAWind");
