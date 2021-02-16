@@ -1,12 +1,14 @@
 class BelchertownWind extends Wind {
   constructor(stationId) {
-    super();
-    this.stationId = stationId;
-
+    super(stationId);
+    this.loadData();
+  }
+    
+  makeRequest() {
     // Make request to get JSON weather data for stationId
     this.xmlhttp = new XMLHttpRequest();
-    this.xmlhttp.onreadystatechange = this.onDataLoad.bind(this);
-    this.xmlhttp.open('GET', stationId, true);
+    this.xmlhttp.onreadystatechange = this.onResponseReceived.bind(this);
+    this.xmlhttp.open('GET', this.stationId, true);
     this.xmlhttp.send();
 
     // mixdivr.org's homepage.json has:
@@ -28,44 +30,36 @@ class BelchertownWind extends Wind {
     // - chart8: weatherRange
   }
 
-  onDataLoad() {
-    if (this.xmlhttp.readyState == 4) {
-      if (this.xmlhttp.status == 200) {
-        var response = JSON.parse(this.xmlhttp.responseText);
-        var windDir = [];
-        var windSpeed = [];
-        var windGust = [];
-        // Filter out data that is not within the last three hours
-        var minMoment = moment().subtract(3, 'hours');
+  parseData() {
+    var response = JSON.parse(this.xmlhttp.responseText);
+    var windDir = [];
+    var windSpeed = [];
+    var windGust = [];
+    // Filter out data that is not within the last three hours
+    var minMoment = moment().subtract(3, 'hours');
 
-        for (var i=0; i<response.chart3.series.windDir.data.length; i++) {
-          var observation = response.chart3.series.windDir.data[i];
-          var observationMoment = moment(observation[0]);
-          if (!observationMoment.isAfter(minMoment)) continue;
+    for (var i=0; i<response.chart3.series.windDir.data.length; i++) {
+      var observation = response.chart3.series.windDir.data[i];
+      var observationMoment = moment(observation[0]);
+      if (!observationMoment.isAfter(minMoment)) continue;
 
-          windDir.push({x: observationMoment, y: Math.round(observation[1])});
-        }
-
-        for (var i=0; i<response.chart3.series.windSpeed.data.length; i++) {
-          var observation = response.chart3.series.windSpeed.data[i];
-          var observationMoment = moment(observation[0]);
-          if (!observationMoment.isAfter(minMoment)) continue;
-          windSpeed.push({x: observationMoment, y: Math.round(observation[1] * 10) / 10});
-        }
-
-        for (var i=0; i<response.chart3.series.windGust.data.length; i++) {
-          var observation = response.chart3.series.windGust.data[i];
-          var observationMoment = moment(observation[0]);
-          if (!observationMoment.isAfter(minMoment)) continue;
-          windGust.push({x: observationMoment, y: Math.round(observation[1] * 10) / 10});
-        }
-
-        this.createChart(windSpeed, windGust, windDir);
-      } else {
-        console.error("Didn't get the expected status: " + this.xmlhttp.status);
-        // Display empty charts
-        this.createChart([], [], []);
-      }
+      windDir.push({x: observationMoment, y: Math.round(observation[1])});
     }
+
+    for (var i=0; i<response.chart3.series.windSpeed.data.length; i++) {
+      var observation = response.chart3.series.windSpeed.data[i];
+      var observationMoment = moment(observation[0]);
+      if (!observationMoment.isAfter(minMoment)) continue;
+      windSpeed.push({x: observationMoment, y: Math.round(observation[1] * 10) / 10});
+    }
+
+    for (var i=0; i<response.chart3.series.windGust.data.length; i++) {
+      var observation = response.chart3.series.windGust.data[i];
+      var observationMoment = moment(observation[0]);
+      if (!observationMoment.isAfter(minMoment)) continue;
+      windGust.push({x: observationMoment, y: Math.round(observation[1] * 10) / 10});
+    }
+
+    this.createChart(windSpeed, windGust, windDir);   
   }
 }

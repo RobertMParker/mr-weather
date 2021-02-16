@@ -26,7 +26,10 @@ Chart.controllers.LineWithLine = Chart.controllers.line.extend({
 
 // A class for speed(avg + gust) and direction wind charts
 class Wind {
-  constructor() {}
+  constructor(stationId) {
+    this.stationId = stationId;
+    this.remainingRetries = 3;
+  }
 
   static get FONT_SIZE() {
     return 20;
@@ -46,6 +49,35 @@ class Wind {
 
   static get BLUE() {
     return 'rgb(59, 73, 227)';
+  }
+  
+  loadData() {
+    this.remainingRetries--;
+    this.makeRequest();
+  }
+  
+  makeRequest() {
+    console.error("This method is intended to be abstract, and should be overridden");
+  }
+  
+  onResponseReceived() {
+    if (this.xmlhttp.readyState == 4) {
+      if (this.xmlhttp.status == 200) {
+        this.parseData();
+      } else {
+        console.error("Station(" + this.stationId +  ") didn't get the expected status: " + this.xmlhttp.status);
+        if (this.remainingRetries > 0) {
+          this.loadData();
+        } else {  
+          // Display empty charts
+          this.createChart([], [], []);
+        }
+      }
+    }
+  }
+  
+  parseData() {
+    console.error("This method is intended to be abstract, and should be overridden");
   }
 
   createChart(windSpeed, windGust, windDir, forecast=false) {
