@@ -15,8 +15,8 @@ class WUWind extends Wind {
 
   static get API_KEY() {
     // This is the value that the weather underground website was using.
-    // Hopefully they don't change it frequently.
-    return '6532d6454b8aa370768e63d6ba5a832e';
+    // It has changed in the past, but not very often.
+    return 'e1f10a1e78da46f5b10a1e78da96f525';
   }
 
   parseData() {
