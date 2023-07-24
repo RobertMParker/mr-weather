@@ -13,6 +13,11 @@ function loadChartData() {
     new WUWind(elements[i].id);
   }
   
+  elements = document.getElementsByClassName("TempestWind");
+  for (var i=0; i<elements.length; i++) {
+    new TempestWind(elements[i].id);
+  }
+  
   elements = document.getElementsByClassName("NWSWind");
   for (var i=0; i<elements.length; i++) {
     new NWSWind(elements[i].id);
