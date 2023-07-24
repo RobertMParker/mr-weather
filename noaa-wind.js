@@ -1,16 +1,15 @@
 // Class for getting measurements from https://www.ndbc.noaa.gov/data/5day2/<station_id>_5day.txt
 
 class NOAAWind extends Wind {
-  constructor(stationId, timezone) {
+  constructor(stationId) {
     super(stationId);
-    this.tzOffset = -parseInt(moment().tz(timezone).format('ZZ'))/100;
     this.loadData();
   }
   
   makeRequest() {
     this.xmlhttp = new XMLHttpRequest();
     this.xmlhttp.onreadystatechange = this.onResponseReceived.bind(this);
-    // Found this cors proxy randomly on Google, not sure if it's trustworthy
+    // Found this cors proxy randomly on Google, not sure if it's trustworthy/reliable
     const url = 'https://corsproxy.io/?' + encodeURIComponent('https://www.ndbc.noaa.gov/data/5day2/' + this.stationId + '_5day.txt');
     this.xmlhttp.open('GET', url, true);
     this.xmlhttp.send();
@@ -34,8 +33,9 @@ class NOAAWind extends Wind {
     var windSpeed = [];
     var windGust = [];
     var minMoment = moment().subtract(3, 'hours');
+    var METERS_PER_SECOND_TO_MILES_PER_HOUR_MULTIPLIER = 2.23694
     for (var i=0; i<lines.length; i++) {
-      var cols = lines[i].split(' ')
+      var cols = lines[i].split(/\s+/)
       if (cols[0].startsWith('#')) continue;
 
       var year = parseInt(cols[0]);
@@ -46,6 +46,9 @@ class NOAAWind extends Wind {
       var wind_direction = parseInt(cols[5]);
       var wind_speed_meters_per_second = parseInt(cols[6]);
       var wind_gust_meters_per_second = parseInt(cols[7]);
+      
+      // NOAA sometimes has "MM" in place of data, not sure what it means but ignore it
+      if (isNaN(wind_direction) || isNaN(wind_speed_meters_per_second) || isNaN(wind_gust_meters_per_second)) continue;
 
       // Month is 0-indexed
       var observationMoment = moment.utc([year, month-1, day, hour, minute]);
@@ -54,8 +57,8 @@ class NOAAWind extends Wind {
       if (!observationMoment.isAfter(minMoment)) continue;
 
       windDir.push({x: observationMoment, y: wind_direction});
-      windSpeed.push({x: observationMoment, y: Math.round(wind_speed_meters_per_second * 2.23694)});
-      windGust.push({x: observationMoment, y: Math.round(wind_gust_meters_per_second * 2.23694)});
+      windSpeed.push({x: observationMoment, y: Math.round(wind_speed_meters_per_second * METERS_PER_SECOND_TO_MILES_PER_HOUR_MULTIPLIER)});
+      windGust.push({x: observationMoment, y: Math.round(wind_gust_meters_per_second * METERS_PER_SECOND_TO_MILES_PER_HOUR_MULTIPLIER)});
     }
     this.createChart(windSpeed, windGust, windDir);
   }
