@@ -28,11 +28,6 @@ function loadChartData() {
     new BelchertownWind(elements[i].id);
   }
   
-  elements = document.getElementsByClassName("AWWind");
-  for (var i=0; i<elements.length; i++) {
-    new AWWind(elements[i].id, parseInt(elements[i].getAttribute('wind-direction-offset')));
-  }
-  
   elements = document.getElementsByClassName("NOAAWind");
   for (var i=0; i<elements.length; i++) {
     new NOAAWind(elements[i].id, elements[i].getAttribute('timezone'));
